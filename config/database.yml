@@ -3,8 +3,8 @@ development:
   encoding: unicode
   database: device_app
   pool: 5
-  # username: postgres
-  # password: 12345678
+  username: dev
+  password: 123456
   host: localhost 
 
 production:
@@ -12,6 +12,6 @@ production:
   encoding: unicode
   database: device_app1
   pool: 5
-  # username: postgres
-  # password: 12345678
+  username: dev
+  password: 123456
   host: localhost 
