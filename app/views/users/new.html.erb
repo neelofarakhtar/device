@@ -1,0 +1,41 @@
+<h2>Add new user</h2>
+<%= form_with url: create_user_path do |form| %>
+  <div>
+    <%= form.label :firstname %><br>
+    <%= form.text_field :firstname %>
+  </div>
+
+   <div>
+    <%= form.label :lastname %><br>
+    <%= form.text_field :lastname %>
+  </div>
+
+   <div>
+    <%= form.label :address %><br>
+    <%= form.text_field :address %>
+  </div>
+
+   <div>
+    <%= form.label :mobile_number %><br>
+    <%= form.text_field :mobile_number %>
+  </div>
+
+  <div>
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password %><br>
+    <%= form.password_field :password, autocomplete: "new-password" %>
+  </div>
+  
+   <div>
+   <%= form.collection_check_boxes :role_ids, Role.all, :id, :name %>
+  <%= @user.errors[:roles] %>
+</div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

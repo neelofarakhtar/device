@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  rolify
+  require 'csv'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,:confirmable,
@@ -19,24 +21,24 @@ class User < ApplicationRecord
     end
   end
 
+   after_create :assign_default_role
 
-
-before_destroy :message
-
-def message
-  puts "Hey!,I will run before destroying an object"
-end
-
-
-after_initialize do |user|
-    puts "You have initialized an object!"
+  def assign_default_role
+    self.add_role(:newuser) if self.roles.blank?
   end
 
-  after_find do |user|
-    puts "You have found an object!"
-  end
-
-   after_touch do |user|
-    puts "You have touched an object"
-  end
+    def self.import(file)
+      file =File.open(file)
+        csv = CSV.parse(file, headers: true)
+        csv.each do |row|
+            user_hash = User.new
+            user_hash.firstname = row[0]
+            user_hash.lastname = row[1]
+            user_hash.email = row[2]
+            user_hash.address = row[3]
+            user_hash.mobile_number = row[4]
+            user_hash.password = row[5]
+            user_hash.save!
+        end
+    end
 end

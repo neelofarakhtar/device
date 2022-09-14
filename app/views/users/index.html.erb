@@ -4,22 +4,36 @@
 <%= current_user.email %>
 <%= current_user.roles.pluck(:name) %>
 <% if current_user.has_role? :admin %>
-<%= link_to "Add new user", new_user_session_path %>
+<%= link_to "Add new user", new_user_path %>
+<%= form_with url: import_users_path, method: :post do |form| %>
+  <%= form.file_field :file, accept: ".csv" %>
+  <%= form.button "Import" %>
+<% end %>
 <table class="table table-hover">
 
   <thead class="thead-dark">
     <tr>
+      <th>First name</th>
+      <th>Last name</th>
       <th>Email</th>
+      <th>Role</th>
+      <th>Address</th>
+      <th>Mobile_number</th>
     </tr>
   </thead>
 
   <tbody>
+
     <% @users.each do |user| %>
     <tr>
-        <td><%= user.email %></td>
+      <td><%= user.firstname %></td>
+      <td><%= user.lastname %></td>
+      <td><%= user.email %></td>
       <td><%= user.roles.pluck(:name)%></td>
+      <td><%= user.address %></td>
+      <td><%= user.mobile_number %></td>
       <td><%= button_to "show",  user_path(user), method: :get %></td>
-   </tr>
+      <td><%= button_to "edit user",  edit_user_path(user), method: :get  %></td>
     <% end %>
   </tbody>
 </table>
