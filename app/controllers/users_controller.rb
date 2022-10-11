@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  include Indore
+
+  def page_one
+   @users =read_user 
+  end
+
    def import
     # debugger
      User.import(params[:file])
@@ -8,6 +14,7 @@ class UsersController < ApplicationController
 
   def index
      @users = User.order(created_at: :desc)
+     
   end
     
   def new

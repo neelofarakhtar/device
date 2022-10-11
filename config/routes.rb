@@ -11,4 +11,5 @@ Rails.application.routes.draw do
     end
   end
   post '/create_user', to: "users#create_user" 
+  get '/page_one', to: "users#page_one"
 end

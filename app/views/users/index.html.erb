@@ -39,6 +39,7 @@
 </table>
 <% end %>
 <%= button_to "Sign Out",destroy_user_session_path, method: :delete %>
+<%= link_to "User Concern Page",page_one_path, method: :get %>
 <% else %>
 
 <p>You are not sign in.</p>

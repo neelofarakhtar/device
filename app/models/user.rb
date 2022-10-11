@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   rolify
   require 'csv'
+  # include Bhopal
+  extend Bhopal
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,:confirmable,
@@ -28,6 +30,7 @@ class User < ApplicationRecord
   end
 
     def self.import(file)
+      # debugger
       file =File.open(file)
         csv = CSV.parse(file, headers: true)
         csv.each do |row|

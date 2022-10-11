@@ -1,3 +1,12 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: device_app
+  pool: 5
+  username: dev
+  password: 123456
+  host: localhost 
+
 development:
   adapter: postgresql
   encoding: unicode
